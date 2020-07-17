@@ -36,7 +36,7 @@ Button btnWrite, btnRead;
         if (permissionCheck == PermissionChecker.PERMISSION_GRANTED) {
         } else {
             ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                   new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
 
         }
         folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
@@ -69,24 +69,27 @@ Button btnWrite, btnRead;
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Code for file reading
-                String folderLocation= Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
-                File targetFile= new File(folderLocation, "data.txt");
-                if (targetFile.exists() == true){String data ="";try {
-                    FileReader reader = new FileReader(targetFile);
-                    BufferedReader br= new BufferedReader(reader);
-                    String line = br.readLine();
-                    while (line != null){
-                        data += line + "\n";
-                        line = br.readLine();
-                    }
-                   tv.setText(data);
+                    //Code for file reading
+                    String folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Folder";
+                    File targetFile = new File(folderLocation, "data.txt");
+                    if (targetFile.exists() == true) {
+                        String data = "";
+                        try {
+                            FileReader reader = new FileReader(targetFile);
+                            BufferedReader br = new BufferedReader(reader);
+                            String line = br.readLine();
+                            while (line != null) {
+                                data += line + "\n";
+                                line = br.readLine();
+                            }
                     br.close();
                     reader.close();
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "Failed to read!", Toast.LENGTH_LONG).show();e.printStackTrace();
+                    e.printStackTrace();
                 }
                     Log.d("content", data);
+                    tv.setText(data);
                 }
             }
         });
